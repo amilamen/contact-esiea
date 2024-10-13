@@ -1,0 +1,11 @@
+.new-contact {
+  .container-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    ion-button {
+      width: 80%;
+    }
+  }
+}

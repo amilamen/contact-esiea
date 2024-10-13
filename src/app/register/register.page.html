@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="register">
+  <div>
+    <form [formGroup]="registerForm">
+      <ion-item>
+        <ion-input
+          label="Fullname"
+          labelPlacement="stacked"
+          placeholder="John Doe"
+          formControlName="fullName"
+        >
+        </ion-input>
+      </ion-item>
+      @if (registerForm.get('fullName')?.dirty) {
+        @if (registerForm.get('fullName')?.errors?.['required']) {
+          <span class="span-error">This field is required</span>
+        }
+
+        @if (registerForm.get('fullName')?.errors?.['minlength']) {
+          <span class="span-error">Minimum characters should be 2.</span>
+        }
+      }
+
+      <ion-item>
+        <ion-input
+          label="E-mail"
+          labelPlacement="stacked"
+          placeholder="email@example.com"
+          formControlName="email"
+        >
+        </ion-input>
+      </ion-item>
+      @if (registerForm.get('email')?.dirty) {
+        @if (registerForm.get('email')?.errors?.['required']) {
+          <span class="span-error">This field is required</span>
+        }
+
+        @if (registerForm.get('email')?.errors?.['email']) {
+          <span class="span-error">Your e-mail is invalid.</span>
+        }
+      }
+
+      <ion-item>
+        <ion-input
+          label="Password"
+          labelPlacement="stacked"
+          [type]="passwordType"
+          placeholder="***********"
+          formControlName="password"
+        >
+        </ion-input>
+        <ion-icon id="icon-eye" [name]="passwordIcon" (click)="onToggleShowPassword()"></ion-icon>
+      </ion-item>
+      @if (registerForm.get('password')?.dirty) {
+        @if (registerForm.get('password')?.errors?.['required']) {
+          <span class="span-error">This field is required</span>
+        }
+
+        @if (registerForm.get('password')?.errors?.['minlength']) {
+          <span class="span-error">Your password should be strong with at least 08 characters.</span>
+        }
+      }
+
+      <div class="container-button">
+        <ion-button size="medium" [disabled]="registerForm.invalid" (click)="onSignUp()">
+          Sign Up
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

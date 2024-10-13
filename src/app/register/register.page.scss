@@ -1,0 +1,23 @@
+.register {
+
+  form:last-child > ion-item > ion-input {
+    width: 90%;
+  }
+
+  #icon-eye {
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 26px;
+  }
+
+  .container-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    ion-button {
+      width: 80%;
+    }
+  }
+}

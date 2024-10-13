@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="caret-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>new-contact</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="new-contact">
+  <div>
+    <form [formGroup]="contactForm">
+      <ion-item>
+        <ion-input
+          label="Fullname"
+          labelPlacement="stacked"
+          placeholder="John Doe"
+          formControlName="fullName"
+        >
+        </ion-input>
+      </ion-item>
+      @if (contactForm.get('fullName')?.dirty) {
+        @if (contactForm.get('fullName')?.errors?.['required']) {
+          <span class="span-error">This field is required</span>
+        }
+
+        @if (contactForm.get('fullName')?.errors?.['minlength']) {
+          <span class="span-error">Minimum characters should be 2.</span>
+        }
+      }
+
+      <ion-item>
+        <ion-input
+          label="Phone number"
+          labelPlacement="stacked"
+          type="text"
+          placeholder="0701020304"
+          formControlName="phoneNumber"
+        >
+        </ion-input>
+      </ion-item>
+      @if (contactForm.get('phoneNumber')?.dirty) {
+        @if (contactForm.get('phoneNumber')?.errors?.['required']) {
+          <span class="span-error">This field is required</span>
+        }
+
+        @if (contactForm.get('phoneNumber')?.errors?.['minlength'] || contactForm.get('phoneNumber')?.errors?.['maxlength']) {
+          <span class="span-error">Your phoneNumber should be 10 digits.</span>
+        }
+      }
+
+      <div class="container-button">
+        <ion-button size="medium" [disabled]="contactForm.invalid" (click)="onSave()">
+          Save
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

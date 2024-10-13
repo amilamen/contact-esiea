@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="login">
+  <div>
+    <form [formGroup]="loginForm">
+      <ion-item>
+        <ion-input
+          label="E-mail"
+          labelPlacement="stacked"
+          placeholder="email@example.com"
+          formControlName="email"
+        >
+        </ion-input>
+      </ion-item>
+      @if (loginForm.get('email')?.dirty) {
+        @if (loginForm.get('email')?.errors?.['required']) {
+          <span class="span-error">This field is required</span>
+        }
+
+        @if (loginForm.get('email')?.errors?.['email']) {
+          <span class="span-error">Your e-mail is invalid.</span>
+        }
+      }
+
+      <ion-item>
+        <ion-input
+          label="Password"
+          labelPlacement="stacked"
+          [type]="passwordType"
+          placeholder="***********"
+          formControlName="password"
+        >
+        </ion-input>
+        <ion-icon id="icon-eye" [name]="passwordIcon" (click)="onToggleShowPassword()"></ion-icon>
+      </ion-item>
+      @if (loginForm.get('password')?.dirty) {
+        @if (loginForm.get('password')?.errors?.['required']) {
+          <span class="span-error">This field is required</span>
+        }
+
+        @if (loginForm.get('password')?.errors?.['minlength']) {
+          <span class="span-error">Your password should be strong with at least 08 characters.</span>
+        }
+      }
+
+      <div class="container-button">
+        <ion-button size="medium" [disabled]="loginForm.invalid" (click)="onSignIn()">
+          Sign Up
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>
